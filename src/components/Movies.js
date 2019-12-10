@@ -26,7 +26,7 @@ export default class Movies extends Component {
 
    renderTableData() {
       return this.state.movies.map((movies, index) => {
-         const { id, name, price, units } = movies
+         const { id, name, Release, Rating } = movies
          return (
             <tr key={id}>
                <td>{index + 1}</td>

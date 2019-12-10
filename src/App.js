@@ -14,6 +14,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={AllComponentsPage} />
             <Route path="/AddPage" component={AddPage} />
+            {/* <Route path=":id" component={MovieDetails}/> */}
           </Switch>
         </div>
       </Router>

@@ -5,7 +5,7 @@ export default class MovieList extends React.Component {
   render () {
    
     var movieNodes = this.props.movies.map(movie => (
-        <Movie key={movie.id} name={movie.name} price={movie.Release} units={movie.Rating} >
+        <Movie id={movie.id} name={movie.name} Release={movie.Release} Rating={movie.Rating} >
           {movie.text}
         </Movie>
     ));

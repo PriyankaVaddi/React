@@ -17,14 +17,17 @@ export default class  AllComponentspage extends React.Component {
         };
 
     }
-
+    getAllMovies=()=>{
+        MovieApi.getAllMovies(data=>this.setState({movies:data}))
+     }
     componentDidMount() {
-console.log(this.state.movies)
-MovieApi.getAllMovies(data=>this.setState({movies:data}))
-     ;
+            console.log(this.state.movies)
+            this.getAllMovies();
 
+                }
+    addPage = ()=>{
+        this.props.history.push('/AddPage',{data:this.state.movies})
     }
-
     render() {
 
         return (
@@ -35,7 +38,8 @@ MovieApi.getAllMovies(data=>this.setState({movies:data}))
 
                 <MovieList
         movies={this.state.movies} />
-        <Link to="/AddPage">Add Movie</Link>
+        <button onClick={this.addPage}>Add Page</button>
+        {/* <Link to="/AddPage">Add Movie</Link> */}
 
             </div>
 

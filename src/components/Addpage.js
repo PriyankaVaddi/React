@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-
+import MovieApi from '../Data/MovieApi'
+import Movies from './Movies';
 class AddPage extends Component {
    constructor() {
       super();
       this.state = {
-         movies: [],
+         movie:{},
+         movies:[]
        
         
       }
@@ -12,8 +14,8 @@ class AddPage extends Component {
    }
 
    update(e) {
-      let movies = { id: this.state.unique_id, name:this.b.value, price: this.c.value, units: this.d.value }
-      this.setState({movies: movies})
+      let movie = { name:this.b.value, Release: this.c.value, Rating: this.d.value }
+      this.setState({movie: movie})
    }
 
    renderTableData() {
@@ -35,23 +37,32 @@ class AddPage extends Component {
    }
    componentDidMount() {
       if (this.props.location.state !== undefined) {
-         this.setState({ movies: this.props.location.state.data })
-         this.setState({unique_id: this.props.location.state.unique_id})
+         this.setState({ movies: this.props.location.state.data})
+         // this.setState({unique_id: this.props.location.state.unique_id})
       }
       else{
-         this.setState({unique_id: 100})
+         console.log(this.state.movies)
+         // const id = this.state.movies[this.state.movies.length-1].id + 1
+       
       }
    }
 
-
+   getAllMovies=()=>{
+      MovieApi.getAllMovies(data=>this.setState({movies:data}))
+   }
    addRowHandler = () => {
-      this.state.movies.push(this.state.movies)
-      this.setState({ movies: this.state.movies });
-      this.props.history.push('/', { data: this.state.movies, unique_id: this.state.unique_id })
+      this.setState({ movies: this.props.location.state.data});
+      var movie = this.state.movie
+      // this.getAllMovies()
+      MovieApi.addMovies(movie,data=>this.setState({movies:data}));
+      console.log(this.state.movies)
+      this.getAllMovies()
+      this.props.history.push('/', { data: this.state.movies})
    }
 
 
    render() {
+      console.log(this.props.location.state.data)
       return (
          <div>
             <table id='movies'>
