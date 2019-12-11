@@ -15,14 +15,14 @@ export default class MovieApi {
 
 	}
 
-	static getAllComments() {
-		return JSON.parse(JSON.stringify(MovieData.movies));
+
+	static getMovie(id,cb){
+		axios.get(`http://localhost:4000/movies/${id}`)
+		.then(response => cb(response.data))
+
+		.catch(error => { throw error });
 	}
 
-	static saveComment(movies) {
-    movies.id = ++currentID;
-		Moviedata.movies.push(movies);
-	}
 
 
 
