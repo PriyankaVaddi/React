@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+import Moviedata from './Moviedata';
+let currentID = 1;
+
 export default class MovieApi {
 
 	static getAllMovies(cb) {
@@ -11,6 +14,18 @@ export default class MovieApi {
 			.catch(error => { throw error });
 
 	}
+
+	static getAllComments() {
+		return JSON.parse(JSON.stringify(MovieData.movies));
+	}
+
+	static saveComment(movies) {
+    movies.id = ++currentID;
+		Moviedata.movies.push(movies);
+	}
+
+
+
 	static addMovies(movie,cb){
 		axios.post('http://localhost:4000/movies',movie)
 		.then(response=>cb(response.data))
@@ -18,3 +33,10 @@ export default class MovieApi {
 	}
 
 }
+
+
+
+
+
+
+	
